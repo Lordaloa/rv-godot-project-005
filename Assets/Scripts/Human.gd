@@ -2,15 +2,20 @@ extends CharacterBody3D
 
 @onready var armature = $Skeleton
 @onready var skeleton = $Skeleton/Skeleton3D
+@onready var skeleton_look_at_modifier = $Skeleton/Skeleton3D/LookAtModifier3D
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
-@onready var camera = $SpringArmPivot/SpringArm3D/Camera3D
 @onready var anim_tree = $AnimationTree
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const LERP_VAL = 0.15
+const ATTACKING_COOLDOWN = 1.0
+const ATTACKING_LOOKAT_TIME = 0.125
+const ATTACKING_LOOKINGAWAY_TIME = 0.125
+var cooldown = 0.0
 var MOUSE_MODE = Input.MOUSE_MODE_CAPTURED
+var IS_ATTACKING = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -52,15 +57,24 @@ func _physics_process(delta: float) -> void:
 	# Play running animation based on speed, perhaps add extra if prevent callback when not moving.
 	anim_tree.set("parameters/Running/blend_position", velocity.length() / SPEED)
 	
-	if Input.is_action_pressed("attack"):
-		print("Attack!")
-		# var new_trans = skeleton.get_bone_global_pose(skeleton.find_bone("Spine_Upper")).looking_at(camera.global_transform.origin, Vector3.FORWARD)
-		print(skeleton.get_bone_pose(skeleton.find_bone("Spine_Upper")).basis)
-		# print(skeleton.get_bone_global_pose(skeleton.find_bone("Spine_Upper")))
-		print(spring_arm_pivot.transform.basis)
-		print(spring_arm.transform.basis)
-		print(camera.global_transform.basis)
-		# skeleton.set_bone_global_pose(skeleton.find_bone("Spine_Upper"),camera.global_transform.basis) 
+	if Input.is_action_pressed("attack") and cooldown <= 0.0:
+		cooldown = ATTACKING_COOLDOWN
+		IS_ATTACKING = true;
+		
 		anim_tree.set("parameters/Attack/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	
+	elif cooldown <= 0.0:
+		skeleton_look_at_modifier.set_influence(lerp(skeleton_look_at_modifier.influence, 0.0, ATTACKING_LOOKINGAWAY_TIME))
+		IS_ATTACKING = false;
+
+	if IS_ATTACKING:
+		skeleton_look_at_modifier.set_influence(lerp(skeleton_look_at_modifier.influence, 1.0, ATTACKING_LOOKAT_TIME))
+	cooldown -= delta
 	move_and_slide()
+
+# print("Attack!")
+# var new_trans = skeleton.get_bone_global_pose(skeleton.find_bone("Spine_Upper")).looking_at(camera.global_transform.origin, Vector3.FORWARD)
+# print(skeleton.get_bone_pose(skeleton.find_bone("Spine_Upper")))
+# print(skeleton.get_bone_global_pose(skeleton.find_bone("Spine_Upper")))
+# print(spring_arm_pivot.transform)
+# print(spring_arm.transform)
+# skeleton.set_bone_global_pose(skeleton.find_bone("Spine_Upper"),spring_arm_pivot.transform * spring_arm.transform) 
