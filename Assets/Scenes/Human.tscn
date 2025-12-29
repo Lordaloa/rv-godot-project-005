@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://crsse6shxmcdh"]
+[gd_scene load_steps=14 format=3 uid="uid://crsse6shxmcdh"]
 
 [ext_resource type="PackedScene" uid="uid://ync26duadr45" path="res://Assets/Models/Human.glb" id="1_2glle"]
 [ext_resource type="Script" uid="uid://8fpi3xhvt345" path="res://Assets/Scripts/Human.gd" id="2_rfrhu"]
@@ -7,12 +7,23 @@
 radius = 0.175
 height = 1.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7oa2v"]
+animation = &"Skeleton_Blocking"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jxekh"]
 animation = &"Skeleton_Attacking"
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_7oa2v"]
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_s6t64"]
 filter_enabled = true
-filters = ["Skeleton/Skeleton3D:Left_Hand_Bone", "Skeleton/Skeleton3D:Left_Lower_Arm_Bone", "Skeleton/Skeleton3D:Left_Upper_Arm_Bone", "Skeleton/Skeleton3D:Right_Hand_Bone", "Skeleton/Skeleton3D:Right_Lower_Arm_Bone", "Skeleton/Skeleton3D:Right_Upper_Arm_Bone"]
+filters = ["Skeleton/Skeleton3D:Right_Hand_Bone", "Skeleton/Skeleton3D:Right_Lower_Arm_Bone", "Skeleton/Skeleton3D:Right_Upper_Arm_Bone"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_rfrhu"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_rfrhu"]
+filter_enabled = true
+filters = ["Skeleton/Skeleton3D:Left_Hand_Bone", "Skeleton/Skeleton3D:Left_Lower_Arm_Bone", "Skeleton/Skeleton3D:Left_Upper_Arm_Bone"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_s6t64"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rfrhu"]
 animation = &"Skeleton_Idle"
@@ -28,22 +39,30 @@ blend_point_1/pos = 1.0
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7oa2v"]
-graph_offset = Vector2(112.666664, 313.33334)
-nodes/output/position = Vector2(986.6667, 240)
+graph_offset = Vector2(-103.05859, 41.684406)
+nodes/output/position = Vector2(1280, 400)
 nodes/Running/node = SubResource("AnimationNodeBlendSpace1D_jxekh")
-nodes/Running/position = Vector2(226.66667, 133.33333)
-nodes/Attack/node = SubResource("AnimationNodeOneShot_7oa2v")
-nodes/Attack/position = Vector2(586.6667, 293.33334)
+nodes/Running/position = Vector2(66.666664, 0)
+nodes/Attack/node = SubResource("AnimationNodeBlend2_s6t64")
+nodes/Attack/position = Vector2(506.66666, 173.33333)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_jxekh")
-nodes/Animation/position = Vector2(186.66667, 613.3333)
-node_connections = [&"output", 0, &"Attack", &"Attack", 0, &"Running", &"Attack", 1, &"Animation"]
+nodes/Animation/position = Vector2(-53.333332, 413.33334)
+nodes/Block/node = SubResource("AnimationNodeBlend2_rfrhu")
+nodes/Block/position = Vector2(1000, 360)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_7oa2v")
+"nodes/Animation 2/position" = Vector2(386.66666, 626.6667)
+nodes/Attack_TimeSeek/node = SubResource("AnimationNodeTimeSeek_rfrhu")
+nodes/Attack_TimeSeek/position = Vector2(240, 360)
+nodes/Block_TimeSeek/node = SubResource("AnimationNodeTimeSeek_s6t64")
+nodes/Block_TimeSeek/position = Vector2(720, 533.3333)
+node_connections = [&"output", 0, &"Block", &"Attack", 0, &"Running", &"Attack", 1, &"Attack_TimeSeek", &"Block", 0, &"Attack", &"Block", 1, &"Block_TimeSeek", &"Attack_TimeSeek", 0, &"Animation", &"Block_TimeSeek", 0, &"Animation 2"]
 
 [node name="Human" instance=ExtResource("1_2glle")]
 script = ExtResource("2_rfrhu")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.2809343, 0)
+bones/1/position = Vector3(0, -0.27381563, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
@@ -62,13 +81,13 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.2809343, 0)
-bones/18/rotation = Quaternion(0.98706913, 0.0032496452, 0.044548184, -0.15394622)
-bones/19/rotation = Quaternion(-0.27915373, -1.5579164e-07, -5.9285373e-08, 0.96024644)
-bones/20/rotation = Quaternion(0.79179955, 0.0019113834, -0.0060843346, 0.6107478)
-bones/21/rotation = Quaternion(0.9943007, -0.018660907, -0.1030953, -0.019727688)
-bones/22/rotation = Quaternion(-0.24442933, -1.572227e-07, -5.2109847e-08, 0.96966714)
-bones/23/rotation = Quaternion(0.84709656, 0.01129121, -0.026574718, 0.5306541)
+bones/17/position = Vector3(0, -0.27381563, 0)
+bones/18/rotation = Quaternion(0.98254484, 0.004367999, 0.04435889, -0.18060735)
+bones/19/rotation = Quaternion(-0.34222773, -1.511851e-07, -7.307051e-08, 0.9396171)
+bones/20/rotation = Quaternion(0.8151881, 0.002189913, -0.0061185146, 0.57916003)
+bones/21/rotation = Quaternion(0.9933154, -0.021960385, -0.10317307, -0.04687875)
+bones/22/rotation = Quaternion(-0.31454462, -1.576594e-07, -6.906421e-08, 0.9492428)
+bones/23/rotation = Quaternion(0.8704283, 0.01283885, -0.02674991, 0.49140024)
 
 [node name="LookAtModifier3D" type="LookAtModifier3D" parent="Skeleton/Skeleton3D" index="16"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -98,6 +117,7 @@ root_motion_track = NodePath("Skeleton/Skeleton3D:Root")
 tree_root = SubResource("AnimationNodeBlendTree_7oa2v")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Running/blend_position = 0.0
-parameters/Attack/active = false
-parameters/Attack/internal_active = false
-parameters/Attack/request = 0
+parameters/Attack/blend_amount = 0.0
+parameters/Block/blend_amount = 0.0
+parameters/Attack_TimeSeek/seek_request = -1.0
+parameters/Block_TimeSeek/seek_request = -1.0

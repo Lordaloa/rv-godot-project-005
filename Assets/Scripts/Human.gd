@@ -10,12 +10,13 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const LERP_VAL = 0.15
-const ATTACKING_COOLDOWN = 1.0
-const ATTACKING_LOOKAT_TIME = 0.125
-const ATTACKING_LOOKINGAWAY_TIME = 0.125
-var cooldown = 0.0
+const BLOCKING_TIME = 0.25
+const ATTACKING_TIME = 0.25
+const LOOKING_TIME = 0.125
+
 var MOUSE_MODE = Input.MOUSE_MODE_CAPTURED
 var IS_ATTACKING = false
+var IS_BLOCKING = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -56,19 +57,34 @@ func _physics_process(delta: float) -> void:
 
 	# Play running animation based on speed, perhaps add extra if prevent callback when not moving.
 	anim_tree.set("parameters/Running/blend_position", velocity.length() / SPEED)
-	
-	if Input.is_action_pressed("attack") and cooldown <= 0.0:
-		cooldown = ATTACKING_COOLDOWN
-		IS_ATTACKING = true;
-		
-		anim_tree.set("parameters/Attack/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	elif cooldown <= 0.0:
-		skeleton_look_at_modifier.set_influence(lerp(skeleton_look_at_modifier.influence, 0.0, ATTACKING_LOOKINGAWAY_TIME))
-		IS_ATTACKING = false;
 
-	if IS_ATTACKING:
-		skeleton_look_at_modifier.set_influence(lerp(skeleton_look_at_modifier.influence, 1.0, ATTACKING_LOOKAT_TIME))
-	cooldown -= delta
+	if Input.is_action_pressed("block"):
+		IS_BLOCKING = true
+		anim_tree.set("parameters/Block/blend_amount",lerp(anim_tree.get("parameters/Block/blend_amount"), 1.0, BLOCKING_TIME))
+	else:
+		IS_BLOCKING = false
+		anim_tree.set("parameters/Block/blend_amount",lerp(anim_tree.get("parameters/Block/blend_amount"), 0.0, BLOCKING_TIME))
+		if (anim_tree.get("parameters/Block/blend_amount") <= 0.1):
+			anim_tree.set("parameters/Block_TimeSeek/seek_request", 0.0)
+		
+
+
+	if Input.is_action_pressed("attack"):
+		IS_ATTACKING = true;
+		anim_tree.set("parameters/Attack/blend_amount",lerp(anim_tree.get("parameters/Attack/blend_amount"), 1.0, ATTACKING_TIME))
+	else:
+		IS_ATTACKING = false
+		anim_tree.set("parameters/Attack/blend_amount",lerp(anim_tree.get("parameters/Attack/blend_amount"), 0.0, ATTACKING_TIME))
+		if (anim_tree.get("parameters/Attack/blend_amount") <= 0.1):
+			anim_tree.set("parameters/Attack_TimeSeek/seek_request", 0.0)
+
+
+	if IS_ATTACKING or IS_BLOCKING:
+		skeleton_look_at_modifier.set_influence(lerp(skeleton_look_at_modifier.influence, 1.0, LOOKING_TIME))
+	else:
+		skeleton_look_at_modifier.set_influence(lerp(skeleton_look_at_modifier.influence, 0.0, LOOKING_TIME))
+
+
 	move_and_slide()
 
 # print("Attack!")
