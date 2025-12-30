@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://crsse6shxmcdh"]
+[gd_scene load_steps=15 format=3 uid="uid://crsse6shxmcdh"]
 
-[ext_resource type="PackedScene" uid="uid://ync26duadr45" path="res://Assets/Models/Human.glb" id="1_2glle"]
-[ext_resource type="Script" uid="uid://8fpi3xhvt345" path="res://Assets/Scripts/Human.gd" id="2_rfrhu"]
+[ext_resource type="PackedScene" uid="uid://ync26duadr45" path="res://assets/models/human.glb" id="1_2glle"]
+[ext_resource type="Script" uid="uid://8fpi3xhvt345" path="res://assets/scripts/human.gd" id="2_rfrhu"]
+[ext_resource type="PackedScene" uid="uid://bfayq5a7b4acy" path="res://assets/scenes/training_sword.tscn" id="3_s6t64"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2glle"]
 radius = 0.175
@@ -62,7 +63,7 @@ script = ExtResource("2_rfrhu")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.27381563, 0)
+bones/1/position = Vector3(0, -0.2777967, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
@@ -81,13 +82,19 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.27381563, 0)
-bones/18/rotation = Quaternion(0.98254484, 0.004367999, 0.04435889, -0.18060735)
-bones/19/rotation = Quaternion(-0.34222773, -1.511851e-07, -7.307051e-08, 0.9396171)
-bones/20/rotation = Quaternion(0.8151881, 0.002189913, -0.0061185146, 0.57916003)
-bones/21/rotation = Quaternion(0.9933154, -0.021960385, -0.10317307, -0.04687875)
-bones/22/rotation = Quaternion(-0.31454462, -1.576594e-07, -6.906421e-08, 0.9492428)
-bones/23/rotation = Quaternion(0.8704283, 0.01283885, -0.02674991, 0.49140024)
+bones/17/position = Vector3(0, -0.2777967, 0)
+bones/18/rotation = Quaternion(0.9850474, 0.003775103, 0.04446595, -0.16640362)
+bones/19/rotation = Quaternion(-0.30873534, -1.5587649e-07, -6.523843e-08, 0.951148)
+bones/20/rotation = Quaternion(0.80285406, 0.0020392805, -0.0060983747, 0.59614104)
+bones/21/rotation = Quaternion(0.99392813, -0.020206666, -0.103119, -0.032635733)
+bones/22/rotation = Quaternion(-0.27768508, -1.5627009e-07, -6.0050205e-08, 0.96067214)
+bones/23/rotation = Quaternion(0.85827553, 0.012000872, -0.026641836, 0.5123567)
+
+[node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
+visible = false
+
+[node name="Right_Weapon_001" parent="Skeleton/Skeleton3D" index="14"]
+visible = false
 
 [node name="LookAtModifier3D" type="LookAtModifier3D" parent="Skeleton/Skeleton3D" index="16"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -95,6 +102,18 @@ target_node = NodePath("../../../SpringArmPivot/SpringArm3D/Camera3D/LookAtTarge
 bone_name = "Spine_Upper"
 bone = 1
 forward_axis = 5
+
+[node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.2733477, 0.20195201)
+bone_name = "Right_Hand_Bone"
+bone = 4
+
+[node name="Training_Sword" parent="Skeleton/Skeleton3D/Right_Hand_Target" index="0" instance=ExtResource("3_s6t64")]
+
+[node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.2733477, -0.20195201)
+bone_name = "Left_Hand_Bone"
+bone = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

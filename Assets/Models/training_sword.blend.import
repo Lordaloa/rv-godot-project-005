@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://f3bhcsy2sxbc"
-path="res://.godot/imported/human.blend-738fbf7b85a13f54d00c9db65cf59296.scn"
+uid="uid://cqjtbw60fh18w"
+path="res://.godot/imported/training_sword.blend-7913e83e0df0981c882100707dc42d0a.scn"
 
 [deps]
 
-source_file="res://assets/models/human.blend"
-dest_files=["res://.godot/imported/human.blend-738fbf7b85a13f54d00c9db65cf59296.scn"]
+source_file="res://assets/models/training_sword.blend"
+dest_files=["res://.godot/imported/training_sword.blend-7913e83e0df0981c882100707dc42d0a.scn"]
 
 [params]
 
