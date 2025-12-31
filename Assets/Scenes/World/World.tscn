@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bud8gsj51giu2"]
+[gd_scene load_steps=15 format=3 uid="uid://bud8gsj51giu2"]
 
 [ext_resource type="Material" uid="uid://dmf77n36q742y" path="res://assets/materials/example_brown.tres" id="1_ahn5v"]
 [ext_resource type="Material" uid="uid://drwdimmp6pnad" path="res://assets/materials/example_green.tres" id="2_045r4"]
 [ext_resource type="PackedScene" uid="uid://crsse6shxmcdh" path="res://assets/scenes/human.tscn" id="3_vfpse"]
 [ext_resource type="Material" uid="uid://dwe1gwakc782" path="res://assets/materials/example_grey.tres" id="4_8c2if"]
+[ext_resource type="PackedScene" uid="uid://c1ysu20xrvg3k" path="res://assets/scenes/human_bot.tscn" id="4_lm4am"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_34566"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -64,6 +65,9 @@ mesh = SubResource("PlaneMesh_ddssj")
 shape = SubResource("ConcavePolygonShape3D_isjxs")
 
 [node name="Human" parent="." instance=ExtResource("3_vfpse")]
+
+[node name="HumanBot" parent="." instance=ExtResource("4_lm4am")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -9.111516)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5539947, 0.3796543, -3.8989244)

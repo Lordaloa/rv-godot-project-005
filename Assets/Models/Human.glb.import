@@ -41,9 +41,9 @@ _subresources={
 "animations": {
 "Skeleton_Attacking": {
 "save_to_file/enabled": false,
-"save_to_file/fallback_path": "",
-"save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "",
+"save_to_file/fallback_path": "res://assets/models/animations/Skeleton_Attacking.res",
+"save_to_file/keep_custom_tracks": false,
+"save_to_file/path": "uid://kj3w3v7kqvn5",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -8262,26 +8262,6 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
-}
-},
-"meshes": {
-"Human_Left_Weapon_001": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 20.0,
-"save_to_file/enabled": false,
-"save_to_file/fallback_path": "res://Assets/Models/Meshes/Human_Left_Weapon_001.res",
-"save_to_file/path": "uid://bt7kpbb4rfvy7"
-},
-"Human_Right_Weapon_001": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 20.0,
-"save_to_file/enabled": false,
-"save_to_file/fallback_path": "res://Assets/Models/Meshes/Human_Right_Weapon_001.res",
-"save_to_file/path": "uid://bmruis6rlxwg1"
 }
 }
 }
