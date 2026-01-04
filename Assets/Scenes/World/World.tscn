@@ -68,6 +68,8 @@ shape = SubResource("ConcavePolygonShape3D_isjxs")
 
 [node name="HumanBot" parent="." instance=ExtResource("4_lm4am")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -9.111516)
+total_health = 1000.0
+health = 1000.0
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5539947, 0.3796543, -3.8989244)

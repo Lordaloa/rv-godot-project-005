@@ -9,7 +9,7 @@ func is_attacking() -> bool:
     return false
 
 func is_blocking() -> bool:
-    return false
+    return true
 
 func get_looking_vector() -> Vector2:
     return Vector2.ZERO

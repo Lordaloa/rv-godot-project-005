@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1ysu20xrvg3k"]
+[gd_scene load_steps=16 format=3 uid="uid://c1ysu20xrvg3k"]
 
 [ext_resource type="PackedScene" uid="uid://ync26duadr45" path="res://assets/models/human.glb" id="1_35m51"]
 [ext_resource type="Script" uid="uid://8fpi3xhvt345" path="res://assets/scripts/human.gd" id="2_axnwr"]
+[ext_resource type="PackedScene" uid="uid://bfayq5a7b4acy" path="res://assets/scenes/training_sword.tscn" id="3_knhdx"]
 [ext_resource type="Script" uid="uid://gtrrsagpj1j6" path="res://assets/scripts/input_controllers/input_controller_entity_human_bot.gd" id="4_knhdx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2glle"]
@@ -58,13 +59,14 @@ nodes/Block_TimeSeek/node = SubResource("AnimationNodeTimeSeek_s6t64")
 nodes/Block_TimeSeek/position = Vector2(720, 533.3333)
 node_connections = [&"output", 0, &"Block", &"Attack", 0, &"Running", &"Attack", 1, &"Attack_TimeSeek", &"Block", 0, &"Attack", &"Block", 1, &"Block_TimeSeek", &"Attack_TimeSeek", 0, &"Animation", &"Block_TimeSeek", 0, &"Animation 2"]
 
-[node name="HumanBot" node_paths=PackedStringArray("input_controller") instance=ExtResource("1_35m51")]
+[node name="HumanBot" node_paths=PackedStringArray("equiped_weapon", "input_controller") instance=ExtResource("1_35m51")]
 script = ExtResource("2_axnwr")
+equiped_weapon = NodePath("Skeleton/Skeleton3D/Left_Hand_Target/TrainingSword")
 input_controller = NodePath("InputControllerEntityHumanBot")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.27465007, 0)
+bones/1/position = Vector3(0, -0.2788305, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
@@ -83,13 +85,13 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.27465007, 0)
-bones/18/rotation = Quaternion(0.9830535, 0.0042523094, 0.044381257, -0.17781517)
-bones/19/rotation = Quaternion(-0.3356627, -1.5067627e-07, -7.189677e-08, 0.94198227)
-bones/20/rotation = Quaternion(0.8127848, 0.002159625, -0.0061138994, 0.58252794)
-bones/21/rotation = Quaternion(0.9934506, -0.021615028, -0.10315802, -0.04412707)
-bones/22/rotation = Quaternion(-0.30738628, -1.549839e-07, -6.2637724e-08, 0.9515849)
-bones/23/rotation = Quaternion(0.8680835, 0.012669276, -0.026724037, 0.49553654)
+bones/17/position = Vector3(0, -0.2788305, 0)
+bones/18/rotation = Quaternion(0.9857125, 0.003607234, 0.044493392, -0.16241412)
+bones/19/rotation = Quaternion(-0.29928344, -1.5670565e-07, -6.381982e-08, 0.9541643)
+bones/20/rotation = Quaternion(0.7993389, 0.001998022, -0.0060936324, 0.60084635)
+bones/21/rotation = Quaternion(0.99406487, -0.019713439, -0.10310984, -0.02854485)
+bones/22/rotation = Quaternion(-0.2671399, -1.5591651e-07, -5.680478e-08, 0.9636578)
+bones/23/rotation = Quaternion(0.85475457, 0.011772287, -0.026618252, 0.51821584)
 
 [node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
 visible = false
@@ -105,14 +107,18 @@ bone = 1
 forward_axis = 5
 
 [node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.27020106, 0.20195201)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.2743815, 0.20195201)
 bone_name = "Right_Hand_Bone"
 bone = 4
 
 [node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.27020106, -0.20195201)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.2743815, -0.20195201)
 bone_name = "Left_Hand_Bone"
 bone = 7
+
+[node name="TrainingSword" parent="Skeleton/Skeleton3D/Left_Hand_Target" index="0" node_paths=PackedStringArray("entity_owner") instance=ExtResource("3_knhdx")]
+transform = Transform3D(1, 0, -2.1316282e-14, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0, 0)
+entity_owner = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
