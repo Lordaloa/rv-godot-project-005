@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://wdpxnplu2qvh"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_35m51"]
+animation = &"Skeleton_Blocking"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_axnwr"]
+animation = &"Skeleton_Attacking"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_s6t64"]
+filter_enabled = true
+filters = ["Skeleton/Skeleton3D:Right_Hand_Bone", "Skeleton/Skeleton3D:Right_Lower_Arm_Bone", "Skeleton/Skeleton3D:Right_Upper_Arm_Bone"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_rfrhu"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_rfrhu"]
+filter_enabled = true
+filters = ["Skeleton/Skeleton3D:Left_Hand_Bone", "Skeleton/Skeleton3D:Left_Lower_Arm_Bone", "Skeleton/Skeleton3D:Left_Upper_Arm_Bone"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_s6t64"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pvgnj"]
+animation = &"Skeleton_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cd22o"]
+animation = &"Skeleton_Running"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_kposb"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_pvgnj")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_cd22o")
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7oa2v"]
+graph_offset = Vector2(-206.67973, 142.39677)
+nodes/output/position = Vector2(1280, 400)
+nodes/Attack_TimeSeek/node = SubResource("AnimationNodeTimeSeek_rfrhu")
+nodes/Attack_TimeSeek/position = Vector2(240, 360)
+nodes/Attack/node = SubResource("AnimationNodeBlend2_s6t64")
+nodes/Attack/position = Vector2(506.66666, 173.33333)
+nodes/Block_TimeSeek/node = SubResource("AnimationNodeTimeSeek_s6t64")
+nodes/Block_TimeSeek/position = Vector2(720, 533.3333)
+nodes/Block/node = SubResource("AnimationNodeBlend2_rfrhu")
+nodes/Block/position = Vector2(1000, 360)
+nodes/Running/node = SubResource("AnimationNodeBlendSpace1D_kposb")
+nodes/Running/position = Vector2(133.33333, 13.333333)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_axnwr")
+nodes/Animation/position = Vector2(-40, 453.33334)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_35m51")
+"nodes/Animation 2/position" = Vector2(493.33334, 613.3333)
+node_connections = [&"output", 0, &"Block", &"Attack_TimeSeek", 0, &"Animation", &"Attack", 0, &"Running", &"Attack", 1, &"Attack_TimeSeek", &"Block_TimeSeek", 0, &"Animation 2", &"Block", 0, &"Attack", &"Block", 1, &"Block_TimeSeek"]
+
+[node name="AnimationTree" type="AnimationTree"]
+root_motion_track = NodePath("Skeleton/Skeleton3D:Root")
+tree_root = SubResource("AnimationNodeBlendTree_7oa2v")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Attack_TimeSeek/seek_request = -1.0
+parameters/Attack/blend_amount = 0.0
+parameters/Block_TimeSeek/seek_request = -1.0
+parameters/Block/blend_amount = 0.0
+parameters/Running/blend_position = 0.0

@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfayq5a7b4acy"]
+[gd_scene load_steps=4 format=3 uid="uid://bfayq5a7b4acy"]
 
 [ext_resource type="Script" uid="uid://pg6taox1dr8s" path="res://assets/scripts/weapon_melee_sword.gd" id="1_0ubh4"]
 [ext_resource type="ArrayMesh" uid="uid://opfim4nqy67b" path="res://assets/models/meshes/training_sword.res" id="1_2pjru"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0ubh4"]
-size = Vector3(0.1, 1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mpgsx"]
 radius = 0.05
@@ -15,15 +12,6 @@ script = ExtResource("1_0ubh4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_2pjru")
-
-[node name="Blocking_Area3D" type="Area3D" parent="."]
-monitoring = false
-monitorable = false
-
-[node name="Blocking_CollisionShape3D" type="CollisionShape3D" parent="Blocking_Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("BoxShape3D_0ubh4")
-debug_color = Color(0, 0, 1, 0.41960785)
 
 [node name="Damage_Area3D" type="Area3D" parent="."]
 monitoring = false

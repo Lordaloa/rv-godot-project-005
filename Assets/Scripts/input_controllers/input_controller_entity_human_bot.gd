@@ -5,11 +5,11 @@ extends InputControllerEntityHuman
 func get_input_vector() -> Vector2:
     return Vector2.ZERO
 
-func is_attacking() -> bool:
+func is_right_hand_action() -> bool:
     return false
 
-func is_blocking() -> bool:
-    return true
+func is_left_hand_action() -> bool:
+    return false
 
 func get_looking_vector() -> Vector2:
     return Vector2.ZERO

@@ -17,7 +17,7 @@ extends CharacterBody3D
 var input_vector: Vector2 = Vector2.ZERO
 var input_looking: Vector2 = Vector2.ZERO
 @onready var armature = $Skeleton
-@onready var anim_tree = $AnimationTree
+@onready var animation_tree = $AnimationTree
 @onready var spring_arm_pivot = $SpringArmPivot
 @onready var spring_arm = $SpringArmPivot/SpringArm3D
 
