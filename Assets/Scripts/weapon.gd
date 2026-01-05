@@ -2,11 +2,11 @@ class_name Weapon
 extends Node
 ## "Abstract" Weapon class for all weapon objects. Handles all Weapon related actions.
 
+signal has_cooled_down
 ## The entity who owns this weapon (prevents self and team-damage).
 @export var entity_owner: Entity
-@export var total_cooldown_time: float = 1.0;
-@export var is_continuous_action: bool = false;
-var cooldown_time:float = 0.0
+@export var cooldown_time: float = 1.0;
+var is_cooling: bool = false
 
 # -----------------------------------------------------------------------------
 # Virtuals
@@ -14,10 +14,9 @@ var cooldown_time:float = 0.0
 
 func _ready() -> void:
 	pass
-
-func _process(delta: float) -> void:
-	if !has_cooled_down():
-		cooldown(delta)
+	
+func _process(_delta: float) -> void:
+	pass
 
 func _physics_process(_delta: float) -> void:
 	pass
@@ -34,19 +33,11 @@ func init_weapon(new_entity_owner: Entity) -> Weapon:
 # Publics
 # -----------------------------------------------------------------------------
 
-func has_continuous_action() -> bool:
-	return is_continuous_action
-
 func action(_delta: float) -> void:
-	if has_cooled_down():
-		reset_cooldown()
-	# return true
+	cooldown()
 
-func cooldown(delta: float) -> void:
-	cooldown_time -= delta
-
-func has_cooled_down() -> bool:
-	return cooldown_time <= 0.0
-
-func reset_cooldown() -> void:
-	cooldown_time = total_cooldown_time
+func cooldown() -> void:
+	is_cooling = true
+	await get_tree().create_timer(cooldown_time).timeout
+	is_cooling = false
+	emit_signal('has_cooled_down')

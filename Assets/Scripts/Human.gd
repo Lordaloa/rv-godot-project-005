@@ -10,7 +10,9 @@ extends Entity
 @export_range(0.01, 1.0) var looking_lerp = 0.25
 @export var right_hand_weapon: Weapon
 @export var left_hand_weapon: Weapon
+var is_right_hand_occupied: bool = false
 var input_is_right_hand_action: bool = false
+var is_left_hand_occupied: bool = false
 var input_is_left_hand_action: bool = false
 @onready var skeleton_look_at_modifier = $Skeleton/Skeleton3D/LookAtModifier3D
 @onready var skeleton_right_hand_target = $Skeleton/Skeleton3D/Right_Hand_Target
@@ -23,6 +25,11 @@ var input_is_left_hand_action: bool = false
 func _ready() -> void:
 	super._ready()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	## TODO Move this to equiping and unequiping functions. Assure equipment is cooled down before allowing unequiping?
+	if right_hand_weapon is Weapon:
+		right_hand_weapon.connect('has_cooled_down', _on_right_hand_action_cooled_down)
+	if left_hand_weapon is Weapon:
+		left_hand_weapon.connect('has_cooled_down', _on_left_hand_action_cooled_down)
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -56,46 +63,25 @@ func _physics_process(delta: float) -> void:
 # -----------------------------------------------------------------------------
 
 func apply_right_hand_action(delta: float) -> void:
-	if input_is_right_hand_action and right_hand_weapon is Weapon:
-		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
-		if right_hand_weapon.has_cooled_down():
-			animation_tree.set("parameters/Right_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	if input_is_right_hand_action and !is_right_hand_occupied and right_hand_weapon is Weapon:
+		is_right_hand_occupied = true
 		right_hand_weapon.action(delta)
-	# if input_is_right_hand_action and right_hand_weapon is Weapon:
-	# 	if right_hand_weapon.has_continuous_action():
-	# 		animation_tree.set("parameters/Right_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Right_Hand_Continuous/blend_amount"), 1.0, right_hand_action_lerp))
-	# 		right_hand_weapon.action(delta)
-	# 	else:
-	# 		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
-	# 		if right_hand_weapon.has_cooled_down():
-	# 			animation_tree.set("parameters/Right_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	# 		right_hand_weapon.action(delta)
-	# else:
-	# 	if right_hand_weapon.has_continuous_action():
-	# 		animation_tree.set("parameters/Right_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Right_Hand_Continuous/blend_amount"), 0.0, right_hand_action_lerp))
-	# 		if (animation_tree.get("parameters/Right_Hand_Continuous/blend_amount") <= 0.1):
-	# 			animation_tree.set("parameters/Right_Hand_Continuous_TimeSeek/seek_request", 0.0)		
+		animation_tree.set("parameters/Right_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func apply_left_hand_action(delta: float):
-	if input_is_left_hand_action and left_hand_weapon is Weapon:
-		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
-		if left_hand_weapon.has_cooled_down():
+	if input_is_left_hand_action:
+		if left_hand_weapon is WeaponShield:
+			animation_tree.set("parameters/Left_Hand_Shield/blend_amount",lerp(animation_tree.get("parameters/Left_Hand_Shield/blend_amount"), 1.0, left_hand_action_lerp))
+			left_hand_weapon.raise_shield()
+		elif !is_left_hand_occupied and left_hand_weapon is Weapon:
+			is_left_hand_occupied = true
+			left_hand_weapon.action(delta)
 			animation_tree.set("parameters/Left_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		left_hand_weapon.action(delta)
-	# if input_is_left_hand_action and left_hand_weapon is Weapon:
-	# 	if left_hand_weapon.has_continuous_action():
-	# 		animation_tree.set("parameters/Left_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Left_Hand_Continuous/blend_amount"), 1.0, left_hand_action_lerp))
-	# 		left_hand_weapon.action(delta)
-	# 	else:
-	# 		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
-	# 		if left_hand_weapon.has_cooled_down():
-	# 			animation_tree.set("parameters/Left_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	# 		left_hand_weapon.action(delta)
-	# else:
-	# 	if left_hand_weapon.has_continuous_action():
-	# 		animation_tree.set("parameters/Left_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Left_Hand_Continuous/blend_amount"), 0.0, left_hand_action_lerp))
-	# 		if (animation_tree.get("parameters/Left_Hand_Continuous/blend_amount") <= 0.1):
-	# 			animation_tree.set("parameters/Left_Hand_Continuous_TimeSeek/seek_request", 0.0)
+	elif left_hand_weapon is WeaponShield:
+		left_hand_weapon.lower_shield()
+		animation_tree.set("parameters/Left_Hand_Shield/blend_amount",lerp(animation_tree.get("parameters/Left_Hand_Shield/blend_amount"), 0.0, left_hand_action_lerp))
+		if (animation_tree.get("parameters/Left_Hand_Shield/blend_amount") <= 0.1):
+			animation_tree.set("parameters/Left_Hand_Shield_TimeSeek/seek_request", 0.0)
 
 func apply_looking(delta: float):
 	super.apply_looking(delta)
@@ -124,3 +110,11 @@ func capture_input():
 # -----------------------------------------------------------------------------
 # Privates
 # -----------------------------------------------------------------------------
+
+func _on_right_hand_action_cooled_down() -> void:
+	is_right_hand_occupied = false
+	print("COOLED")
+
+func _on_left_hand_action_cooled_down() -> void:
+	is_left_hand_occupied = false
+	print("COOLED")

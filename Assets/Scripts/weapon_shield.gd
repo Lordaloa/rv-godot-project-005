@@ -30,16 +30,16 @@ func init_weapon_shield(new_entity_owner: Entity) -> WeaponShield:
 # Publics
 # -----------------------------------------------------------------------------
 
+func raise_shield() -> void:
+	if !is_blocking_area_enabled():
+		enable_blocking_area()
+
+func lower_shield() -> void:
+	if is_blocking_area_enabled():
+		disable_blocking_area()
+
 func action(delta: float) -> void:
-	if has_cooled_down():
-		print("SHIELD ACTION")
 	super.action(delta)
-	# if !is_blocking_area_enabled() and has_cooled_down():
-	# 	reset_cooldown()
-	# 	return true
-	# return false
-	# if !is_blocking_area_enabled():
-		# enable_blocking_area()
 
 func disable_blocking_area() -> void:
 	blocking_area_3d.monitoring = false

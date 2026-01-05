@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://crsse6shxmcdh"]
+[gd_scene load_steps=18 format=3 uid="uid://crsse6shxmcdh"]
 
 [ext_resource type="PackedScene" uid="uid://ync26duadr45" path="res://assets/models/human.glb" id="1_2glle"]
 [ext_resource type="Script" uid="uid://8fpi3xhvt345" path="res://assets/scripts/human.gd" id="2_rfrhu"]
 [ext_resource type="PackedScene" uid="uid://bfayq5a7b4acy" path="res://assets/scenes/training_sword.tscn" id="3_s6t64"]
-[ext_resource type="Script" uid="uid://c04qwikf6mg7p" path="res://assets/scripts/input_controllers/input_controller_entity.gd" id="4_3dgjl"]
 [ext_resource type="Script" uid="uid://d1hpt7ruys5dw" path="res://assets/scripts/input_controllers/input_controller_entity_human_player.gd" id="4_a2tn8"]
 [ext_resource type="PackedScene" uid="uid://dw3p46se7uifm" path="res://assets/scenes/training_shield.tscn" id="4_vnjsp"]
 
@@ -17,11 +16,20 @@ animation = &"Skeleton_Attacking"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xqa82"]
 animation = &"Skeleton_Blocking"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vnjsp"]
+animation = &"Skeleton_Attacking"
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xqa82"]
 filter_enabled = true
 filters = ["Skeleton/Skeleton3D:Left_Hand_Bone", "Skeleton/Skeleton3D:Left_Lower_Arm_Bone", "Skeleton/Skeleton3D:Left_Upper_Arm_Bone"]
 fadein_time = 0.25
 fadeout_time = 0.25
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_5ys0r"]
+filter_enabled = true
+filters = ["Skeleton/Skeleton3D:Left_Hand_Bone", "Skeleton/Skeleton3D:Left_Lower_Arm_Bone", "Skeleton/Skeleton3D:Left_Upper_Arm_Bone"]
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_vnjsp"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_5ys0r"]
 filter_enabled = true
@@ -43,7 +51,7 @@ blend_point_1/pos = 1.0
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7oa2v"]
-graph_offset = Vector2(-134.76189, -27.349365)
+graph_offset = Vector2(-92.71753, 149.48303)
 nodes/output/position = Vector2(1533.3334, 426.66666)
 nodes/Running/node = SubResource("AnimationNodeBlendSpace1D_jxekh")
 nodes/Running/position = Vector2(-426.66666, -160)
@@ -53,9 +61,15 @@ nodes/Right_Hand/node = SubResource("AnimationNodeOneShot_5ys0r")
 nodes/Right_Hand/position = Vector2(400, 173.33333)
 nodes/Left_Hand/node = SubResource("AnimationNodeOneShot_xqa82")
 nodes/Left_Hand/position = Vector2(1120, 426.66666)
-"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_xqa82")
-"nodes/Animation 4/position" = Vector2(786.6667, 840)
-node_connections = [&"output", 0, &"Left_Hand", &"Right_Hand", 0, &"Running", &"Right_Hand", 1, &"Animation 2", &"Left_Hand", 0, &"Right_Hand", &"Left_Hand", 1, &"Animation 4"]
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_xqa82")
+"nodes/Animation 3/position" = Vector2(40, 786.6667)
+nodes/Left_Hand_Shield/node = SubResource("AnimationNodeBlend2_5ys0r")
+nodes/Left_Hand_Shield/position = Vector2(813.3333, 333.33334)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_vnjsp")
+"nodes/Animation 4/position" = Vector2(840, 826.6667)
+nodes/Left_Hand_Shield_TimeSeek/node = SubResource("AnimationNodeTimeSeek_vnjsp")
+nodes/Left_Hand_Shield_TimeSeek/position = Vector2(413.33334, 626.6667)
+node_connections = [&"output", 0, &"Left_Hand", &"Right_Hand", 0, &"Running", &"Right_Hand", 1, &"Animation 2", &"Left_Hand", 0, &"Left_Hand_Shield", &"Left_Hand", 1, &"Animation 4", &"Left_Hand_Shield", 0, &"Right_Hand", &"Left_Hand_Shield", 1, &"Left_Hand_Shield_TimeSeek", &"Left_Hand_Shield_TimeSeek", 0, &"Animation 3"]
 
 [node name="Human" node_paths=PackedStringArray("right_hand_weapon", "left_hand_weapon", "input_controller") instance=ExtResource("1_2glle")]
 script = ExtResource("2_rfrhu")
@@ -65,13 +79,13 @@ input_controller = NodePath("InputControllerEntityHumanPlayer")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.2784521, 0)
+bones/1/position = Vector3(0, -0.27041605, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
-bones/5/rotation = Quaternion(0.6201594, -0.4522945, 0.5055708, -0.3939927)
-bones/6/rotation = Quaternion(0.50873077, 4.4849493e-08, 6.999695e-08, 0.8609256)
-bones/7/rotation = Quaternion(0.62670255, -0.42309353, 0.36752418, 0.5414442)
+bones/5/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
+bones/6/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
+bones/7/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
 bones/9/position = Vector3(0.201952, -0.105388, -1.7655204e-08)
 bones/9/rotation = Quaternion(-0.7071068, 1.10635504e-07, -5.7951933e-08, 0.7071068)
 bones/10/position = Vector3(-0.201952, -0.10538803, 1.7655202e-08)
@@ -84,13 +98,13 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.2784521, 0)
-bones/18/rotation = Quaternion(0.9854709, 0.0036686854, 0.04448343, -0.16387467)
-bones/19/rotation = Quaternion(-0.3027466, -1.5640396e-07, -6.433981e-08, 0.9530712)
-bones/20/rotation = Quaternion(0.8006287, 0.0020131322, -0.006095394, 0.59912646)
-bones/21/rotation = Quaternion(0.99401677, -0.019894015, -0.10311338, -0.030042287)
-bones/22/rotation = Quaternion(-0.27100354, -1.5604812e-07, -5.799351e-08, 0.96257836)
-bones/23/rotation = Quaternion(0.85604787, 0.0118560195, -0.026627025, 0.516074)
+bones/17/position = Vector3(0, -0.27041605, 0)
+bones/18/rotation = Quaternion(0.9804245, 0.004830701, 0.044264913, -0.19179456)
+bones/19/rotation = Quaternion(-0.36841065, -1.4764971e-07, -7.999183e-08, 0.9296632)
+bones/20/rotation = Quaternion(0.8246981, 0.0023119936, -0.0061368784, 0.5655352)
+bones/21/rotation = Quaternion(0.9927015, -0.023340266, -0.10323327, -0.057809036)
+bones/22/rotation = Quaternion(-0.34290493, -1.5325924e-07, -7.197112e-08, 0.93937016)
+bones/23/rotation = Quaternion(0.87959856, 0.013521147, -0.02685479, 0.47476584)
 
 [node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
 visible = false
@@ -106,7 +120,7 @@ bone = 1
 forward_axis = 5
 
 [node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.27400312, 0.20195201)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.26596704, 0.20195201)
 bone_name = "Right_Hand_Bone"
 bone = 4
 
@@ -114,7 +128,7 @@ bone = 4
 entity_owner = NodePath("../../../..")
 
 [node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
-transform = Transform3D(-0.8426429, -0.18757108, -0.5047474, -0.21707235, 0.9761553, -0.00036483817, 0.49278063, 0.10925939, -0.8632684, 0.2824828, 0.62890494, -0.09293412)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.26596704, -0.20195201)
 bone_name = "Left_Hand_Bone"
 bone = 7
 
@@ -145,13 +159,11 @@ parameters/Running/blend_position = 0.0
 parameters/Right_Hand/active = false
 parameters/Right_Hand/internal_active = false
 parameters/Right_Hand/request = 0
-parameters/Left_Hand/active = true
-parameters/Left_Hand/internal_active = true
+parameters/Left_Hand/active = false
+parameters/Left_Hand/internal_active = false
 parameters/Left_Hand/request = 0
+parameters/Left_Hand_Shield/blend_amount = 0.0
+parameters/Left_Hand_Shield_TimeSeek/seek_request = -1.0
 
-[node name="InputControllerEntity" type="Node3D" parent="." index="5"]
-visible = false
-script = ExtResource("4_3dgjl")
-
-[node name="InputControllerEntityHumanPlayer" type="Node3D" parent="." index="6"]
+[node name="InputControllerEntityHumanPlayer" type="Node3D" parent="." index="5"]
 script = ExtResource("4_a2tn8")
