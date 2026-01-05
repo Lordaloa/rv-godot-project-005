@@ -9,6 +9,7 @@ height = 0.5
 
 [node name="TrainingSword" type="Node3D"]
 script = ExtResource("1_0ubh4")
+is_continuous_action = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_2pjru")

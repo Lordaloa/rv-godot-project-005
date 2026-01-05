@@ -11,10 +11,10 @@
 radius = 0.175
 height = 1.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vnjsp"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7oa2v"]
 animation = &"Skeleton_Attacking"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7oa2v"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xqa82"]
 animation = &"Skeleton_Blocking"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xqa82"]
@@ -43,19 +43,19 @@ blend_point_1/pos = 1.0
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7oa2v"]
-graph_offset = Vector2(-368.4137, 32.518536)
+graph_offset = Vector2(-134.76189, -27.349365)
 nodes/output/position = Vector2(1533.3334, 426.66666)
 nodes/Running/node = SubResource("AnimationNodeBlendSpace1D_jxekh")
-nodes/Running/position = Vector2(-66.666664, 0)
-nodes/Animation2/node = SubResource("AnimationNodeAnimation_7oa2v")
-nodes/Animation2/position = Vector2(600, 613.3333)
+nodes/Running/position = Vector2(-426.66666, -160)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_7oa2v")
+"nodes/Animation 2/position" = Vector2(26.666666, 520)
 nodes/Right_Hand/node = SubResource("AnimationNodeOneShot_5ys0r")
 nodes/Right_Hand/position = Vector2(400, 173.33333)
 nodes/Left_Hand/node = SubResource("AnimationNodeOneShot_xqa82")
-nodes/Left_Hand/position = Vector2(960, 333.33334)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_vnjsp")
-nodes/Animation/position = Vector2(24.608093, 507.68958)
-node_connections = [&"output", 0, &"Left_Hand", &"Right_Hand", 0, &"Running", &"Right_Hand", 1, &"Animation", &"Left_Hand", 0, &"Right_Hand", &"Left_Hand", 1, &"Animation2"]
+nodes/Left_Hand/position = Vector2(1120, 426.66666)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_xqa82")
+"nodes/Animation 4/position" = Vector2(786.6667, 840)
+node_connections = [&"output", 0, &"Left_Hand", &"Right_Hand", 0, &"Running", &"Right_Hand", 1, &"Animation 2", &"Left_Hand", 0, &"Right_Hand", &"Left_Hand", 1, &"Animation 4"]
 
 [node name="Human" node_paths=PackedStringArray("right_hand_weapon", "left_hand_weapon", "input_controller") instance=ExtResource("1_2glle")]
 script = ExtResource("2_rfrhu")
@@ -65,13 +65,13 @@ input_controller = NodePath("InputControllerEntityHumanPlayer")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.27382326, 0)
+bones/1/position = Vector3(0, -0.2784521, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
-bones/5/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
-bones/6/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
-bones/7/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
+bones/5/rotation = Quaternion(0.6201594, -0.4522945, 0.5055708, -0.3939927)
+bones/6/rotation = Quaternion(0.50873077, 4.4849493e-08, 6.999695e-08, 0.8609256)
+bones/7/rotation = Quaternion(0.62670255, -0.42309353, 0.36752418, 0.5414442)
 bones/9/position = Vector3(0.201952, -0.105388, -1.7655204e-08)
 bones/9/rotation = Quaternion(-0.7071068, 1.10635504e-07, -5.7951933e-08, 0.7071068)
 bones/10/position = Vector3(-0.201952, -0.10538803, 1.7655202e-08)
@@ -84,13 +84,13 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.27382326, 0)
-bones/18/rotation = Quaternion(0.982537, 0.004370128, 0.044358768, -0.18065004)
-bones/19/rotation = Quaternion(-0.34232587, -1.4987225e-07, -7.34962e-08, 0.93958133)
-bones/20/rotation = Quaternion(0.81522346, 0.0021900996, -0.006118239, 0.57911026)
-bones/21/rotation = Quaternion(0.99331313, -0.021964278, -0.10317109, -0.046929542)
-bones/22/rotation = Quaternion(-0.314651, -1.5390394e-07, -6.5021496e-08, 0.9492075)
-bones/23/rotation = Quaternion(0.87045836, 0.012838956, -0.026748171, 0.49134713)
+bones/17/position = Vector3(0, -0.2784521, 0)
+bones/18/rotation = Quaternion(0.9854709, 0.0036686854, 0.04448343, -0.16387467)
+bones/19/rotation = Quaternion(-0.3027466, -1.5640396e-07, -6.433981e-08, 0.9530712)
+bones/20/rotation = Quaternion(0.8006287, 0.0020131322, -0.006095394, 0.59912646)
+bones/21/rotation = Quaternion(0.99401677, -0.019894015, -0.10311338, -0.030042287)
+bones/22/rotation = Quaternion(-0.27100354, -1.5604812e-07, -5.799351e-08, 0.96257836)
+bones/23/rotation = Quaternion(0.85604787, 0.0118560195, -0.026627025, 0.516074)
 
 [node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
 visible = false
@@ -106,7 +106,7 @@ bone = 1
 forward_axis = 5
 
 [node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.26937422, 0.20195201)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.27400312, 0.20195201)
 bone_name = "Right_Hand_Bone"
 bone = 4
 
@@ -114,7 +114,7 @@ bone = 4
 entity_owner = NodePath("../../../..")
 
 [node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.26937422, -0.20195201)
+transform = Transform3D(-0.8426429, -0.18757108, -0.5047474, -0.21707235, 0.9761553, -0.00036483817, 0.49278063, 0.10925939, -0.8632684, 0.2824828, 0.62890494, -0.09293412)
 bone_name = "Left_Hand_Bone"
 bone = 7
 
@@ -145,8 +145,8 @@ parameters/Running/blend_position = 0.0
 parameters/Right_Hand/active = false
 parameters/Right_Hand/internal_active = false
 parameters/Right_Hand/request = 0
-parameters/Left_Hand/active = false
-parameters/Left_Hand/internal_active = false
+parameters/Left_Hand/active = true
+parameters/Left_Hand/internal_active = true
 parameters/Left_Hand/request = 0
 
 [node name="InputControllerEntity" type="Node3D" parent="." index="5"]

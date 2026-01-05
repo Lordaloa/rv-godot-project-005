@@ -5,6 +5,7 @@ extends Node
 ## The entity who owns this weapon (prevents self and team-damage).
 @export var entity_owner: Entity
 @export var total_cooldown_time: float = 1.0;
+@export var is_continuous_action: bool = false;
 var cooldown_time:float = 0.0
 
 # -----------------------------------------------------------------------------
@@ -32,6 +33,9 @@ func init_weapon(new_entity_owner: Entity) -> Weapon:
 # -----------------------------------------------------------------------------
 # Publics
 # -----------------------------------------------------------------------------
+
+func has_continuous_action() -> bool:
+	return is_continuous_action
 
 func action(_delta: float) -> void:
 	if has_cooled_down():

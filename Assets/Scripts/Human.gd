@@ -57,35 +57,45 @@ func _physics_process(delta: float) -> void:
 
 func apply_right_hand_action(delta: float) -> void:
 	if input_is_right_hand_action and right_hand_weapon is Weapon:
+		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
 		if right_hand_weapon.has_cooled_down():
 			animation_tree.set("parameters/Right_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		right_hand_weapon.action(delta)
-	# 	if equiped_weapon is WeaponMelee and !equiped_weapon.is_damage_area_enabled():
-	# 		equiped_weapon.enable_damage_area()	
-	# 	anim_tree.set("parameters/Attack/blend_amount", lerp(anim_tree.get("parameters/Attack/blend_amount"), 1.0, right_hand_action_lerp))
+	# if input_is_right_hand_action and right_hand_weapon is Weapon:
+	# 	if right_hand_weapon.has_continuous_action():
+	# 		animation_tree.set("parameters/Right_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Right_Hand_Continuous/blend_amount"), 1.0, right_hand_action_lerp))
+	# 		right_hand_weapon.action(delta)
+	# 	else:
+	# 		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
+	# 		if right_hand_weapon.has_cooled_down():
+	# 			animation_tree.set("parameters/Right_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	# 		right_hand_weapon.action(delta)
 	# else:
-	# 	if equiped_weapon is WeaponMelee and equiped_weapon.is_damage_area_enabled():
-	# 		equiped_weapon.disable_damage_area()			
-	# 	anim_tree.set("parameters/Attack/blend_amount", lerp(anim_tree.get("parameters/Attack/blend_amount"), 0.0, right_hand_action_lerp))
-	# 	if (anim_tree.get("parameters/Attack/blend_amount") <= 0.1):
-	# 		anim_tree.set("parameters/Attack_TimeSeek/seek_request", 0.0)
-		
+	# 	if right_hand_weapon.has_continuous_action():
+	# 		animation_tree.set("parameters/Right_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Right_Hand_Continuous/blend_amount"), 0.0, right_hand_action_lerp))
+	# 		if (animation_tree.get("parameters/Right_Hand_Continuous/blend_amount") <= 0.1):
+	# 			animation_tree.set("parameters/Right_Hand_Continuous_TimeSeek/seek_request", 0.0)		
 
 func apply_left_hand_action(delta: float):
 	if input_is_left_hand_action and left_hand_weapon is Weapon:
+		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
 		if left_hand_weapon.has_cooled_down():
 			animation_tree.set("parameters/Left_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		left_hand_weapon.action(delta)
-	# if input_is_left_hand_action:
-	# 	if equiped_weapon is WeaponShield and !equiped_weapon.is_blocking_area_enabled():
-	# 		equiped_weapon.enable_blocking_area()	
-	# 	anim_tree.set("parameters/Block/blend_amount",lerp(anim_tree.get("parameters/Block/blend_amount"), 1.0, left_hand_action_lerp))
+	# if input_is_left_hand_action and left_hand_weapon is Weapon:
+	# 	if left_hand_weapon.has_continuous_action():
+	# 		animation_tree.set("parameters/Left_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Left_Hand_Continuous/blend_amount"), 1.0, left_hand_action_lerp))
+	# 		left_hand_weapon.action(delta)
+	# 	else:
+	# 		# TODO we don't want anything related to cool down in the human, look for a way to seperate weapon or add animation to weapon?	
+	# 		if left_hand_weapon.has_cooled_down():
+	# 			animation_tree.set("parameters/Left_Hand/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	# 		left_hand_weapon.action(delta)
 	# else:
-	# 	if equiped_weapon is WeaponShield and equiped_weapon.is_blocking_area_enabled():
-	# 		equiped_weapon.disable_blocking_area()
-	# 	anim_tree.set("parameters/Block/blend_amount",lerp(anim_tree.get("parameters/Block/blend_amount"), 0.0, left_hand_action_lerp))
-	# 	if (anim_tree.get("parameters/Block/blend_amount") <= 0.1):
-	# 		anim_tree.set("parameters/Block_TimeSeek/seek_request", 0.0)
+	# 	if left_hand_weapon.has_continuous_action():
+	# 		animation_tree.set("parameters/Left_Hand_Continuous/blend_amount",lerp(animation_tree.get("parameters/Left_Hand_Continuous/blend_amount"), 0.0, left_hand_action_lerp))
+	# 		if (animation_tree.get("parameters/Left_Hand_Continuous/blend_amount") <= 0.1):
+	# 			animation_tree.set("parameters/Left_Hand_Continuous_TimeSeek/seek_request", 0.0)
 
 func apply_looking(delta: float):
 	super.apply_looking(delta)
