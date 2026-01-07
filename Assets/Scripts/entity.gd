@@ -32,7 +32,7 @@ var input_looking: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	spine_upper_bone_id = armature.find_bone('Spine_Upper')
-	look_at_modifier.connect('modification_processed',_on_look_at_modified)
+	# look_at_modifier.connect('modification_processed',_on_look_at_modified)
 
 func _process(_delta: float) -> void:
 	capture_input()
@@ -44,11 +44,11 @@ func _physics_process(delta: float) -> void:
 # Publics
 # -----------------------------------------------------------------------------
 
-func try_take_hit(damage: float) -> bool:
-	if !is_blocking():
-		apply_damage(damage)
-		return true
-	return false
+# func try_take_hit(impact_position: Vector3, damage: float) -> bool:
+# 	if is_blocking(impact_position):
+# 		return false
+# 	apply_damage(damage)
+# 	return true
 
 func apply_damage(damage: float):
 	health -= damage
@@ -83,14 +83,12 @@ func apply_movement():
 func get_current_health() -> float:
 	return health;
 
-func is_blocking() -> bool:
-	return false
+# func is_blocking(_impact_position: Vector3) -> bool:
+# 	return false
 
 # -----------------------------------------------------------------------------
 # Privates
 # -----------------------------------------------------------------------------
 
-func _on_look_at_modified() -> void:
-	var spine_transform = armature.get_bone_global_pose(spine_upper_bone_id)
-	var forward = (-spine_transform.basis.z).normalized()
-	print(forward)
+# func _on_look_at_modified() -> void:
+# 	pass

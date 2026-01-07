@@ -10,6 +10,7 @@ extends Entity
 @export_range(0.01, 1.0) var looking_lerp = 0.25
 @export var right_hand_weapon: Weapon
 @export var left_hand_weapon: Weapon
+var spine_forward: Vector3 = Vector3.ZERO
 var is_right_hand_occupied: bool = false
 var input_is_right_hand_action: bool = false
 var is_left_hand_occupied: bool = false
@@ -107,6 +108,12 @@ func capture_input():
 	input_is_right_hand_action = input_controller.is_right_hand_action()
 	input_is_left_hand_action = input_controller.is_left_hand_action()
 
+# func is_blocking(impact_position: Vector3) -> bool:
+# 	print("%s : %s" % [spine_forward, impact_position])
+# 	if spine_forward.dot(impact_position) >= 0:
+# 		return true
+# 	return false
+
 # -----------------------------------------------------------------------------
 # Privates
 # -----------------------------------------------------------------------------
@@ -118,3 +125,8 @@ func _on_right_hand_action_cooled_down() -> void:
 func _on_left_hand_action_cooled_down() -> void:
 	is_left_hand_occupied = false
 	print("COOLED")
+
+# func _on_look_at_modified() -> void:
+	# var spine_transform = armature.get_bone_global_pose(spine_upper_bone_id)
+	# spine_forward = (-spine_transform.basis.z).normalized()
+	# print(spine_forward)

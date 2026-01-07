@@ -61,10 +61,27 @@ func run_action() -> void:
 
 func _test_damage_area() -> void:
 	if is_damage_area_enabled():
-		for entity in damage_area_3d.get_overlapping_bodies():
-			if entity != entity_owner and entity is Entity:
-				if entity.try_take_hit(damage):
-					print(entity.get_current_health())
-				else:
-					print("BLOCKED")
-				disable_damage_area()
+		var target_is_blocking = false
+		var target = false
+		for area in damage_area_3d.get_overlapping_areas():
+			if area.get_parent() is Weapon:
+				target_is_blocking = true
+		for body in damage_area_3d.get_overlapping_bodies():
+			if body != entity_owner and body is Entity:
+				target = body
+		if target:
+			disable_damage_area()
+			if !target_is_blocking and target is Entity:
+				target.apply_damage(damage)
+				print(target.get_current_health())
+			elif target_is_blocking and target is Entity:
+				print("BLOCKED")
+			
+
+		# for entity in damage_area_3d.get_overlapping_bodies():
+		# 	if entity != entity_owner and entity is Entity:
+		# 		if entity.try_take_hit(damage_area_3d.global_position, damage):
+		# 			print(entity.get_current_health())
+		# 		else:
+		# 			print("BLOCKED")
+		# 		disable_damage_area()

@@ -112,7 +112,7 @@ visible = false
 
 [node name="LookAtModifier3D" type="LookAtModifier3D" parent="Skeleton/Skeleton3D" index="16"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-target_node = NodePath("../../../SpringArmPivot/SpringArm3D/LookAtTarget3D")
+target_node = NodePath("../../../SpringArmPivot/SpringArm3D/Camera3D/LookAtTarget3D")
 bone_name = "Spine_Upper"
 bone = 1
 forward_axis = 5
@@ -144,7 +144,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
 spring_length = 1.5
 margin = 0.5
 
-[node name="LookAtTarget3D" type="Node3D" parent="SpringArmPivot/SpringArm3D" index="0"]
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" index="0"]
+
+[node name="LookAtTarget3D" type="Node3D" parent="SpringArmPivot/SpringArm3D/Camera3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [node name="InputControllerEntityHumanBot" type="Node3D" parent="." index="3"]
