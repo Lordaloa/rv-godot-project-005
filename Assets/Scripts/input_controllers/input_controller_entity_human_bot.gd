@@ -12,7 +12,7 @@ func is_right_hand_action_released() -> bool:
     return false
 
 func is_left_hand_action() -> bool:
-    return true
+    return false
 
 func is_left_hand_action_released() -> bool:
     return false

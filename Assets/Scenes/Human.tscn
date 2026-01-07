@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dw3p46se7uifm" path="res://assets/scenes/training_shield.tscn" id="4_vnjsp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2glle"]
-radius = 0.175
+radius = 0.275
 height = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7oa2v"]
@@ -51,7 +51,6 @@ blend_point_1/pos = 1.0
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7oa2v"]
-graph_offset = Vector2(-92.71753, 149.48303)
 nodes/output/position = Vector2(1533.3334, 426.66666)
 nodes/Running/node = SubResource("AnimationNodeBlendSpace1D_jxekh")
 nodes/Running/position = Vector2(-426.66666, -160)
@@ -79,7 +78,7 @@ input_controller = NodePath("InputControllerEntityHumanPlayer")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.27041605, 0)
+bones/1/position = Vector3(0, -0.27031806, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
@@ -98,13 +97,13 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.27041605, 0)
-bones/18/rotation = Quaternion(0.9804245, 0.004830701, 0.044264913, -0.19179456)
-bones/19/rotation = Quaternion(-0.36841065, -1.4764971e-07, -7.999183e-08, 0.9296632)
-bones/20/rotation = Quaternion(0.8246981, 0.0023119936, -0.0061368784, 0.5655352)
-bones/21/rotation = Quaternion(0.9927015, -0.023340266, -0.10323327, -0.057809036)
-bones/22/rotation = Quaternion(-0.34290493, -1.5325924e-07, -7.197112e-08, 0.93937016)
-bones/23/rotation = Quaternion(0.87959856, 0.013521147, -0.02685479, 0.47476584)
+bones/17/position = Vector3(0, -0.27031806, 0)
+bones/18/rotation = Quaternion(0.98036444, 0.004843322, 0.044262204, -0.1921017)
+bones/19/rotation = Quaternion(-0.36912718, -1.4865097e-07, -8.1083e-08, 0.929379)
+bones/20/rotation = Quaternion(0.82495683, 0.0023154134, -0.006137439, 0.5651577)
+bones/21/rotation = Quaternion(0.9926832, -0.023378203, -0.10323534, -0.058104377)
+bones/22/rotation = Quaternion(-0.34367418, -1.5634778e-07, -7.032853e-08, 0.939089)
+bones/23/rotation = Quaternion(0.87984544, 0.013540353, -0.026858082, 0.47430736)
 
 [node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
 visible = false
@@ -113,14 +112,13 @@ visible = false
 visible = false
 
 [node name="LookAtModifier3D" type="LookAtModifier3D" parent="Skeleton/Skeleton3D" index="16"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 target_node = NodePath("../../../SpringArmPivot/SpringArm3D/Camera3D/LookAtTarget3D")
 bone_name = "Spine_Upper"
 bone = 1
 forward_axis = 5
 
 [node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.26596704, 0.20195201)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.26586905, 0.20195201)
 bone_name = "Right_Hand_Bone"
 bone = 4
 
@@ -128,7 +126,7 @@ bone = 4
 entity_owner = NodePath("../../../..")
 
 [node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.26596704, -0.20195201)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.26586905, -0.20195201)
 bone_name = "Left_Hand_Bone"
 bone = 7
 

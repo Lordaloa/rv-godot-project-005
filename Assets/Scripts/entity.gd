@@ -14,19 +14,25 @@ extends CharacterBody3D
 @export_range(0.01, 1.0) var rotation_lerp = 0.15
 ## InputController based on the specific entity's class.
 @export var input_controller: InputControllerEntity
+## Node3D for running any direction based raycasts like is_blocking().
+@export var raycast_node: Node3D
+var spine_upper_bone_id: int
 var input_vector: Vector2 = Vector2.ZERO
 var input_looking: Vector2 = Vector2.ZERO
-@onready var armature = $Skeleton
-@onready var animation_tree = $AnimationTree
-@onready var spring_arm_pivot = $SpringArmPivot
-@onready var spring_arm = $SpringArmPivot/SpringArm3D
+@onready var entity: Node3D = $Skeleton
+@onready var armature: Skeleton3D = $Skeleton/Skeleton3D
+@onready var look_at_modifier: LookAtModifier3D = $Skeleton/Skeleton3D/LookAtModifier3D
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var spring_arm_pivot: Node3D = $SpringArmPivot
+@onready var spring_arm: SpringArm3D = $SpringArmPivot/SpringArm3D
 
 # -----------------------------------------------------------------------------
 # Virtuals
 # -----------------------------------------------------------------------------
 
 func _ready() -> void:
-	pass
+	spine_upper_bone_id = armature.find_bone('Spine_Upper')
+	look_at_modifier.connect('modification_processed',_on_look_at_modified)
 
 func _process(_delta: float) -> void:
 	capture_input()
@@ -38,10 +44,16 @@ func _physics_process(delta: float) -> void:
 # Publics
 # -----------------------------------------------------------------------------
 
+func try_take_hit(damage: float) -> bool:
+	if !is_blocking():
+		apply_damage(damage)
+		return true
+	return false
+
 func apply_damage(damage: float):
 	health -= damage
-	if health <= 0.0:
-		queue_free()
+	# if health <= 0.0:
+		# queue_free()
 
 func apply_gravity(delta: float):
 	if not is_on_floor():
@@ -62,7 +74,7 @@ func apply_movement():
 	if direction:
 		velocity.x = lerp(velocity.x, direction.x * speed, speed_lerp)
 		velocity.z = lerp(velocity.z, direction.z * speed, speed_lerp)
-		armature.global_rotation.y = lerp_angle(armature.global_rotation.y, atan2(-velocity.x, -velocity.z), rotation_lerp)
+		entity.global_rotation.y = lerp_angle(entity.global_rotation.y, atan2(-velocity.x, -velocity.z), rotation_lerp)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, speed_lerp)
 		velocity.z = lerp(velocity.z, 0.0, speed_lerp)
@@ -71,6 +83,14 @@ func apply_movement():
 func get_current_health() -> float:
 	return health;
 
+func is_blocking() -> bool:
+	return false
+
 # -----------------------------------------------------------------------------
 # Privates
 # -----------------------------------------------------------------------------
+
+func _on_look_at_modified() -> void:
+	var spine_transform = armature.get_bone_global_pose(spine_upper_bone_id)
+	var forward = (-spine_transform.basis.z).normalized()
+	print(forward)

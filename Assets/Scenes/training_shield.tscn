@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://hlw8l2xohrjr" path="res://assets/scripts/weapon_shield.gd" id="1_6jhhf"]
 [ext_resource type="ArrayMesh" uid="uid://ph5w3jj10cif" path="res://assets/models/meshes/training_shield.res" id="2_h5tsc"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0ubh4"]
-size = Vector3(0.1, 1, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_6jhhf"]
+size = Vector3(0.25, 1, 1)
 
 [node name="TrainingShield" type="Node3D"]
 script = ExtResource("1_6jhhf")
-is_continuous_action = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_h5tsc")
@@ -18,6 +17,5 @@ monitoring = false
 monitorable = false
 
 [node name="Blocking_CollisionShape3D" type="CollisionShape3D" parent="Blocking_Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, 0, 0)
-shape = SubResource("BoxShape3D_0ubh4")
+shape = SubResource("BoxShape3D_6jhhf")
 debug_color = Color(0, 0, 1, 0.41960785)
