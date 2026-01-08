@@ -7,9 +7,9 @@ signal action_delayed
 signal action_completed
 ## The entity who owns this weapon (prevents self and team-damage).
 @export var entity_owner: Entity
-@export var cooldown_time: float = 0.2;
+@export var cooldown_time: float = 0.4;
 @export var action_delay_time: float = 0.2
-@export var action_time: float = 0.6
+@export var action_time: float = 0.4
 var is_action_delayed: bool = false
 var is_action_completed: bool = false
 var is_cooling: bool = false

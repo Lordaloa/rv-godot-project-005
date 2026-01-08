@@ -14,12 +14,11 @@ extends CharacterBody3D
 @export_range(0.01, 1.0) var rotation_lerp = 0.15
 ## InputController based on the specific entity's class.
 @export var input_controller: InputControllerEntity
-## Node3D for running any direction based raycasts like is_blocking().
-@export var raycast_node: Node3D
-var height: float = 0.75
-var spine_upper_bone_id: int
+## Indicates height of a character for running any direction based raycasts like is_blocking().
+@export var height_to_body_center: float = 0.75
 var input_vector: Vector2 = Vector2.ZERO
 var input_looking: Vector2 = Vector2.ZERO
+var knockback: Vector3 = Vector3.ZERO
 @onready var entity: Node3D = $Skeleton
 @onready var armature: Skeleton3D = $Skeleton/Skeleton3D
 @onready var look_at_modifier: LookAtModifier3D = $Skeleton/Skeleton3D/LookAtModifier3D
@@ -33,8 +32,6 @@ var input_looking: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	pass
-	# spine_upper_bone_id = armature.find_bone('Spine_Upper')
-	# look_at_modifier.connect('modification_processed',_on_look_at_modified)
 
 func _process(_delta: float) -> void:
 	capture_input()
@@ -46,16 +43,16 @@ func _physics_process(delta: float) -> void:
 # Publics
 # -----------------------------------------------------------------------------
 
-func try_take_hit(impact_position: Vector3, damage: float) -> bool:
+func try_take_hit(impact_position: Vector3) -> bool:
 	if is_blocking(impact_position):
 		return false
-	apply_damage(damage)
 	return true
 
 func apply_damage(damage: float):
 	health -= damage
-	# if health <= 0.0:
-		# queue_free()
+
+func apply_knockback(knockback_direction: Vector3, knockback_amount: float):
+	knockback = knockback_direction * knockback_amount
 
 func apply_gravity(delta: float):
 	if not is_on_floor():
@@ -80,27 +77,29 @@ func apply_movement():
 	else:
 		velocity.x = lerp(velocity.x, 0.0, speed_lerp)
 		velocity.z = lerp(velocity.z, 0.0, speed_lerp)
+	if knockback != Vector3.ZERO:
+		velocity.x += knockback.x
+		velocity.z += knockback.z
+		knockback = Vector3.ZERO
 	move_and_slide()
 
 func get_current_health() -> float:
 	return health;
 
+func get_body_center_global_position() -> Vector3:
+	var body_center_global_position: Vector3 = entity.global_position
+	body_center_global_position.y += height_to_body_center
+	return body_center_global_position;
+
 func is_blocking(target_position: Vector3) -> bool:
-	# print(self.global_position)
-	# print(target_position)
-	var p1 = entity.global_position
-	p1.y += height
-	print("%s : %s" % [p1, target_position])
-	var query = PhysicsRayQueryParameters3D.create(p1, target_position)
+	var query = PhysicsRayQueryParameters3D.create(get_body_center_global_position(), target_position)
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
 	var hit = get_world_3d().direct_space_state.intersect_ray(query)
-	print(hit)
+	if hit and hit.collider and hit.collider.monitorable and hit.collider.owner is WeaponShield and hit.collider.owner.entity_owner == self:
+		return true
 	return false
 
 # -----------------------------------------------------------------------------
 # Privates
 # -----------------------------------------------------------------------------
-
-# func _on_look_at_modified() -> void:
-# 	pass
