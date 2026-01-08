@@ -16,6 +16,7 @@ extends CharacterBody3D
 @export var input_controller: InputControllerEntity
 ## Node3D for running any direction based raycasts like is_blocking().
 @export var raycast_node: Node3D
+var height: float = 0.75
 var spine_upper_bone_id: int
 var input_vector: Vector2 = Vector2.ZERO
 var input_looking: Vector2 = Vector2.ZERO
@@ -31,7 +32,8 @@ var input_looking: Vector2 = Vector2.ZERO
 # -----------------------------------------------------------------------------
 
 func _ready() -> void:
-	spine_upper_bone_id = armature.find_bone('Spine_Upper')
+	pass
+	# spine_upper_bone_id = armature.find_bone('Spine_Upper')
 	# look_at_modifier.connect('modification_processed',_on_look_at_modified)
 
 func _process(_delta: float) -> void:
@@ -44,11 +46,11 @@ func _physics_process(delta: float) -> void:
 # Publics
 # -----------------------------------------------------------------------------
 
-# func try_take_hit(impact_position: Vector3, damage: float) -> bool:
-# 	if is_blocking(impact_position):
-# 		return false
-# 	apply_damage(damage)
-# 	return true
+func try_take_hit(impact_position: Vector3, damage: float) -> bool:
+	if is_blocking(impact_position):
+		return false
+	apply_damage(damage)
+	return true
 
 func apply_damage(damage: float):
 	health -= damage
@@ -83,8 +85,18 @@ func apply_movement():
 func get_current_health() -> float:
 	return health;
 
-# func is_blocking(_impact_position: Vector3) -> bool:
-# 	return false
+func is_blocking(target_position: Vector3) -> bool:
+	# print(self.global_position)
+	# print(target_position)
+	var p1 = entity.global_position
+	p1.y += height
+	print("%s : %s" % [p1, target_position])
+	var query = PhysicsRayQueryParameters3D.create(p1, target_position)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	var hit = get_world_3d().direct_space_state.intersect_ray(query)
+	print(hit)
+	return false
 
 # -----------------------------------------------------------------------------
 # Privates
