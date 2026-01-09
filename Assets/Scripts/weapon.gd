@@ -6,13 +6,15 @@ signal has_cooled_down
 signal action_delayed
 signal action_completed
 ## The entity who owns this weapon (prevents self and team-damage).
+@export var is_debug: bool = true
 @export var entity_owner: Entity
-@export var cooldown_time: float = 0.4;
-@export var action_delay_time: float = 0.2
-@export var action_time: float = 0.4
+@export var cooldown_time: float = 0.5;
+@export var action_delay_time: float = 0.4
+@export var action_time: float = 0.2
 var is_action_delayed: bool = false
 var is_action_completed: bool = false
 var is_cooling: bool = false
+@onready var debug: Node3D = get_node_or_null('Debug')
 
 # -----------------------------------------------------------------------------
 # Virtuals

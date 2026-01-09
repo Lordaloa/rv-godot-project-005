@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfayq5a7b4acy"]
+[gd_scene load_steps=5 format=3 uid="uid://bfayq5a7b4acy"]
 
 [ext_resource type="Script" uid="uid://pg6taox1dr8s" path="res://assets/scripts/weapon_melee_sword.gd" id="1_0ubh4"]
 [ext_resource type="ArrayMesh" uid="uid://opfim4nqy67b" path="res://assets/models/meshes/training_sword.res" id="1_2pjru"]
+[ext_resource type="Material" uid="uid://b8pdp25bd2v60" path="res://assets/materials/example_red.tres" id="3_821li"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mpgsx"]
 radius = 0.05
@@ -9,7 +10,15 @@ height = 0.5
 
 [node name="TrainingSword" type="Node3D"]
 script = ExtResource("1_0ubh4")
-is_continuous_action = true
+
+[node name="Debug" type="Node3D" parent="."]
+visible = false
+
+[node name="Damage_Area3D" type="MeshInstance3D" parent="Debug"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+mesh = ExtResource("1_2pjru")
+skeleton = NodePath("../../MeshInstance3D")
+surface_material_override/0 = ExtResource("3_821li")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_2pjru")
