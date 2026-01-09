@@ -32,23 +32,8 @@ func _ready() -> void:
 	if left_hand_weapon is Weapon:
 		left_hand_weapon.connect('has_cooled_down', _on_left_hand_action_cooled_down)
 
-func _process(delta: float) -> void:
-	super._process(delta)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if input_controller is InputControllerEntityHumanPlayer:
-		if event.is_action_pressed("escape"):
-			get_tree().quit()
-		if event.is_action_pressed('control'):
-			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	apply_looking(delta)
-	apply_movement()
 	apply_right_hand_action(delta)
 	apply_left_hand_action(delta)
 	apply_spine_modifier()

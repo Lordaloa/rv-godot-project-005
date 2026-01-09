@@ -34,10 +34,12 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	capture_input()
+	capture_input()	
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
+	apply_looking(delta)
+	apply_movement()
 
 # -----------------------------------------------------------------------------
 # Publics

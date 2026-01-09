@@ -78,7 +78,7 @@ input_controller = NodePath("InputControllerEntityHumanPlayer")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.27038473, 0)
+bones/1/position = Vector3(0, -0.2747052, 0)
 bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
 bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
 bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
@@ -97,13 +97,13 @@ bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
 bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
 bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.27038473, 0)
-bones/18/rotation = Quaternion(0.98040533, 0.0048347344, 0.044264052, -0.19189271)
-bones/19/rotation = Quaternion(-0.36863962, -1.4796963e-07, -8.034046e-08, 0.92957246)
-bones/20/rotation = Quaternion(0.82478076, 0.0023130863, -0.0061370577, 0.5654146)
-bones/21/rotation = Quaternion(0.9926956, -0.023352388, -0.10323393, -0.057903398)
-bones/22/rotation = Quaternion(-0.34315073, -1.5424608e-07, -7.14463e-08, 0.9392804)
-bones/23/rotation = Quaternion(0.8796774, 0.0135272825, -0.02685584, 0.47461933)
+bones/17/position = Vector3(0, -0.2747052, 0)
+bones/18/rotation = Quaternion(0.98309803, 0.0042417673, 0.044383004, -0.17756854)
+bones/19/rotation = Quaternion(-0.3350836, -1.5044347e-07, -7.203662e-08, 0.9421884)
+bones/20/rotation = Quaternion(0.81257284, 0.0021571915, -0.0061138007, 0.58282363)
+bones/21/rotation = Quaternion(0.99346185, -0.021586677, -0.103158474, -0.04388496)
+bones/22/rotation = Quaternion(-0.30677685, -1.6038324e-07, -6.663324e-08, 0.95178145)
+bones/23/rotation = Quaternion(0.8678871, 0.012656862, -0.026723512, 0.49588075)
 
 [node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
 visible = false
@@ -117,16 +117,18 @@ bone_name = "Spine_Upper"
 bone = 1
 forward_axis = 5
 
-[node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.26593575, 0.20195201)
+[node name="Upper_Spine_Tracker" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
+
+[node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.2702562, 0.20195201)
 bone_name = "Right_Hand_Bone"
 bone = 4
 
 [node name="TrainingSword" parent="Skeleton/Skeleton3D/Right_Hand_Target" index="0" node_paths=PackedStringArray("entity_owner") instance=ExtResource("3_s6t64")]
 entity_owner = NodePath("../../../..")
 
-[node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
-transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.26593575, -0.20195201)
+[node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="19"]
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.2702562, -0.20195201)
 bone_name = "Left_Hand_Bone"
 bone = 7
 
@@ -145,10 +147,11 @@ spring_length = 1.5
 margin = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" index="0"]
+transform = Transform3D(1, 5.293956e-23, 4.2351647e-22, -5.293956e-23, 1, 0, -4.2351647e-22, -2.2e-44, 1, 0, 0, 0)
 current = true
 
 [node name="LookAtTarget3D" type="Node3D" parent="SpringArmPivot/SpringArm3D/Camera3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+transform = Transform3D(1, -2.5334801e-08, -3.4045866e-09, -3.491489e-15, -0.13318673, 0.991091, -2.5562533e-08, -0.99109113, -0.13318673, 0, 0, -5)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 root_motion_track = NodePath("Skeleton/Skeleton3D:Root")

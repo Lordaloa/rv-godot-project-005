@@ -78,31 +78,32 @@ input_controller = NodePath("InputControllerEntityHumanBot")
 
 [node name="Skeleton3D" parent="Skeleton" index="0"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-bones/1/position = Vector3(0, -0.27018702, 0)
-bones/2/rotation = Quaternion(0.98347384, 0.17238666, -0.023288788, 0.05019758)
-bones/3/rotation = Quaternion(0.71224487, 3.90159e-08, 1.0796539e-07, 0.7019311)
-bones/4/rotation = Quaternion(0.6663666, 0.067151695, -0.08718245, 0.7374588)
-bones/5/rotation = Quaternion(0.47774068, -0.50503486, 0.5645239, -0.44499037)
-bones/6/rotation = Quaternion(0.58430654, 4.2257895e-08, 8.042683e-08, 0.81153303)
-bones/7/rotation = Quaternion(0.62439597, -0.41728884, 0.46458352, 0.46921417)
-bones/9/position = Vector3(0.26835665, 0.07409288, -0.16316253)
-bones/9/rotation = Quaternion(-0.09240335, -0.0029216486, 0.06542607, 0.9935656)
-bones/10/position = Vector3(-0.024644062, 0.2393274, -0.26356712)
-bones/10/rotation = Quaternion(0.06272234, -0.64062923, -0.05263031, 0.7634725)
-bones/12/position = Vector3(-0.5581797, 0.3701549, 0.29434532)
-bones/13/position = Vector3(0.062928006, 0.061155, 2.4684086e-09)
-bones/13/rotation = Quaternion(-0.7071068, -4.0214186e-08, 6.655598e-08, 0.7071068)
-bones/14/rotation = Quaternion(0.7071068, -1.3170891e-08, 1.3170888e-08, 0.7071068)
-bones/15/rotation = Quaternion(-0.7071068, -6.655598e-08, 4.0214186e-08, 0.7071068)
-bones/16/position = Vector3(-0.062928, -0.38293505, 0.31)
+bones/1/position = Vector3(0, -0.2725991, 0)
+bones/2/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
+bones/3/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
+bones/4/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
+bones/5/rotation = Quaternion(0.999723, 3.642777e-09, -7.253016e-08, 0.023535479)
+bones/6/rotation = Quaternion(0.050797492, 5.2122555e-08, 6.828087e-09, 0.99870896)
+bones/7/rotation = Quaternion(0.687555, 6.6907404e-08, 9.531964e-08, 0.72613233)
+bones/9/position = Vector3(0.201952, -0.105388, -1.7655204e-08)
+bones/9/rotation = Quaternion(-0.7071068, 1.10635504e-07, -5.7951933e-08, 0.7071068)
+bones/10/position = Vector3(-0.201952, -0.10538803, 1.7655202e-08)
+bones/10/rotation = Quaternion(-0.7071068, 1.10635504e-07, -5.7951933e-08, 0.7071068)
+bones/13/position = Vector3(0.062928006, 0.061155, 0.028078506)
+bones/13/rotation = Quaternion(-0.7062315, 0.035172455, 0.035172563, 0.7062315)
+bones/14/position = Vector3(0.093729496, -0.38293505, 0.33654448)
+bones/14/rotation = Quaternion(0.7062315, 0.035172485, -0.035172485, 0.7062315)
+bones/15/position = Vector3(-0.062928, 0.061155, -0.054933473)
+bones/15/rotation = Quaternion(-0.7048461, -0.05649819, -0.056498088, 0.7048461)
+bones/16/position = Vector3(-0.11230787, -0.38293505, 0.2511084)
 bones/16/rotation = Quaternion(0.70484614, -0.05649811, 0.05649811, 0.704846)
-bones/17/position = Vector3(0, -0.27018702, 0)
-bones/18/rotation = Quaternion(0.9879729, -6.5493815e-08, -4.982297e-08, -0.15462726)
-bones/19/rotation = Quaternion(-0.37865728, -1.481159e-07, -8.069087e-08, 0.925537)
-bones/20/rotation = Quaternion(0.85131836, 1.02211914e-07, -5.5130922e-08, 0.52464944)
-bones/21/rotation = Quaternion(0.9879729, -6.549383e-08, -4.982297e-08, -0.15462726)
-bones/22/rotation = Quaternion(-0.37865734, -1.5157731e-07, -7.927479e-08, 0.92553705)
-bones/23/rotation = Quaternion(0.85131836, 1.6944595e-07, -9.416448e-08, 0.52464944)
+bones/17/position = Vector3(0, -0.2725991, 0)
+bones/18/rotation = Quaternion(0.9817788, 0.004539128, 0.044325355, -0.18473002)
+bones/19/rotation = Quaternion(-0.3518966, -1.4944274e-07, -7.55499e-08, 0.936039)
+bones/20/rotation = Quaternion(0.8187131, 0.0022344075, -0.0061248676, 0.5741659)
+bones/21/rotation = Quaternion(0.993103, -0.02246645, -0.10319277, -0.05092248)
+bones/22/rotation = Quaternion(-0.32502058, -1.517087e-07, -7.079721e-08, 0.945707)
+bones/23/rotation = Quaternion(0.8738325, 0.013085987, -0.026785871, 0.48531234)
 
 [node name="Left_Weapon_001" parent="Skeleton/Skeleton3D" index="7"]
 visible = false
@@ -112,13 +113,13 @@ visible = false
 
 [node name="LookAtModifier3D" type="LookAtModifier3D" parent="Skeleton/Skeleton3D" index="16"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-target_node = NodePath("../../../SpringArmPivot/SpringArm3D/Camera3D/LookAtTarget3D")
+target_node = NodePath("../../../SpringArmPivot/SpringArm3D/LookAtTarget3D")
 bone_name = "Spine_Upper"
 bone = 1
 forward_axis = 5
 
 [node name="Right_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="17"]
-transform = Transform3D(-0.011160866, 0.05257033, -0.998556, 0.13022405, 0.9901886, 0.050674237, 0.9914218, -0.12947026, -0.017897181, 0.15185331, 0.4653436, 0.26836)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038239, 0.26815006, 0.20195201)
 bone_name = "Right_Hand_Bone"
 bone = 4
 
@@ -127,7 +128,7 @@ transform = Transform3D(1, 0, -4.973799e-14, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 0
 entity_owner = NodePath("../../../..")
 
 [node name="Left_Hand_Target" type="ModifierBoneTarget3D" parent="Skeleton/Skeleton3D" index="18"]
-transform = Transform3D(-0.9415357, -0.2931697, -0.16601846, -0.28871617, 0.9560603, -0.050907232, 0.17364855, 7.748604e-07, -0.984809, 0.22935557, 0.6424883, -0.02462995)
+transform = Transform3D(7.4690846e-08, 0.9910899, -0.13320535, -2.2464933e-07, 0.13320541, 0.9910885, 1, -4.4100933e-08, 2.3259658e-07, 0.014038222, 0.26815006, -0.20195201)
 bone_name = "Left_Hand_Bone"
 bone = 7
 
@@ -144,9 +145,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
 spring_length = 1.5
 margin = 0.5
 
-[node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" index="0"]
-
-[node name="LookAtTarget3D" type="Node3D" parent="SpringArmPivot/SpringArm3D/Camera3D" index="0"]
+[node name="LookAtTarget3D" type="Node3D" parent="SpringArmPivot/SpringArm3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [node name="InputControllerEntityHumanBot" type="Node3D" parent="." index="3"]
@@ -168,3 +167,5 @@ parameters/Left_Hand/internal_active = false
 parameters/Left_Hand/request = 0
 parameters/Left_Hand_Shield/blend_amount = 0.0
 parameters/Left_Hand_Shield_TimeSeek/seek_request = -1.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="6"]
